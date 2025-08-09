@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Happy Birthday!</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background: #fff5f5;
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .banner {
+            display: flex;
+            justify-content: center;
+            margin-top: 40px;
+            z-index: 25;
+            flex-wrap: wrap;
+            background: linear-gradient(to right, #ff6b6b, #6b6bff);
+            padding: 15px 30px;
+            border-radius: 50px;
+            position: relative;
+        }
+
+        .banner::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: 20px;
+            right: 20px;
+            height: 20px;
+            background: #ffcc00;
+            border-radius: 10px 10px 0 0;
+            z-index: -1;
+        }
+
+        .banner::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 20px;
+            right: 20px;
+            height: 20px;
+            background: #ffcc00;
+            border-radius: 0 0 10px 10px;
+            z-index: -1;
+        }
+
+        .letter-card {
+            width: 50px;
+            height: 70px;
+            background: white;
+            color: #ff6b6b;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 32px;
+            font-weight: bold;
+            margin: 0 3px;
+            border-radius: 8px;
+            position: relative;
+            transform: rotate(-3deg);
+            transition: all 0.3s ease;
+        }
+
+        .letter-card:nth-child(even) {
+            transform: rotate(3deg);
+            color: #6b6bff;
+        }
+
+        .letter-card:hover {
+            transform: rotate(0deg) scale(1.1);
+            background: #ffcc00;
+        }
+
+        .container {
+            position: relative;
+            height: 100%;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        #cake {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 400px;
+            cursor: pointer;
+            transition: all 0.5s ease;
+            z-index: 10;
+        }
+
+        .cake-hidden {
+            opacity: 0 !important;
+            visibility: hidden !important;
+            transition: opacity 0.5s ease, visibility 0s 0.5s !important;
+        }
+
+        .candle {
+            position: absolute;
+            width: 6%;
+            height: 17%;
+            top: -70%;
+            transform: translateX(-50%);
+            z-index: 15;
+            background: linear-gradient(to bottom, #fff 0%, #ffd700 100%);
+            border-radius: 3px;
+        }
+
+        .flame {
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            width: 15px;
+            height: 30px;
+            background: #ff9e00;
+            border-radius: 50% 50% 20% 20%;
+            transform: translateX(-50%);
+            animation: flicker 1s infinite alternate;
+        }
+
+        @keyframes flicker {
+            0% { opacity: 0.8; transform: translateX(-50%) scale(1); }
+            100% { opacity: 1; transform: translateX(-50%) scale(1.1); }
+        }
+
+        .flame-out {
+            animation: blowOut 0.5s forwards;
+        }
+
+        @keyframes blowOut {
+            0% { transform: translateX(-50%) scale(1); opacity: 1; }
+            100% { transform: translateX(-50%) scale(0); opacity: 0; }
+        }
+
+        .balloon {
+            position: absolute;
+            bottom: -100px;
+            width: 80px;
+            height: 104px;
+            background-image: url('https://www.freepngimg.com/thumb/balloon/3-2-balloon-png-image.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            animation: floatUp 8s linear forwards;
+            z-index: 5;
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(0); opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-120vh); opacity: 0; }
+        }
+
+        .letter {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            max-width: 400px;
+            opacity: 0;
+            transition: opacity 1s;
+            z-index: 20;
+            text-align: center;
+        }
+
+        .heart {
+            position: absolute;
+            font-size: 28px;
+            color: #ff6b6b;
+            animation: fall 5s linear forwards;
+            z-index: 8;
+        }
+
+        @keyframes fall {
+            to { transform: translateY(100vh); }
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        @keyframes cakeAppear {
+            from { opacity: 0; transform: translate(-50%, -50%) scale(0.9); }
+            to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+        }
+    </style>
+</head>
+<body>
+    <div class="banner">
+        <div class="letter-card">H</div>
+        <div class="letter-card">A</div>
+        <div class="letter-card">P</div>
+        <div class="letter-card">P</div>
+        <div class="letter-card">Y</div>
+        <div class="letter-card" style="width: 20px; background: transparent;"></div>
+        <div class="letter-card">B</div>
+        <div class="letter-card">I</div>
+        <div class="letter-card">R</div>
+        <div class="letter-card">T</div>
+        <div class="letter-card">H</div>
+        <div class="letter-card">D</div>
+        <div class="letter-card">A</div>
+        <div class="letter-card">Y</div>
+        <div class="letter-card">!</div>
+    </div>
+
+    <div class="container">
+        <img id="cake" src="cake-full.png" alt="Торт">
+
+        <!-- Контейнер для свечей -->
+        <div id="candles-container"></div>
+
+        <div id="balloons-container"></div>
+
+        <div class="letter hidden" id="letter">
+            <p>С днем рождения!</p>
+        </div>
+
+        <div id="hearts-container"></div>
+
+        <audio id="music" loop>
+            <source src="music.mp3" type="audio/mpeg">
+        </audio>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const cake = document.getElementById('cake');
+            const letter = document.getElementById('letter');
+            const balloonsContainer = document.getElementById('balloons-container');
+            const heartsContainer = document.getElementById('hearts-container');
+            const music = document.getElementById('music');
+            const candlesContainer = document.getElementById('candles-container');
+
+            let balloonsInterval;
+            let currentBite = 0;
+            const biteStages = [
+                'cake-full.png',
+                'cake-bite1.png',
+                'cake-bite2.png',
+                'cake-bite3.png',
+                'cake-bite4.png'
+            ];
+
+            const balloonImages = [
+                'https://www.freepngimg.com/thumb/balloon/3-2-balloon-png-image.png',
+                'https://www.freepngimg.com/thumb/balloon/3-2-balloon-png-picture.png',
+                'https://www.freepngimg.com/thumb/balloon/4-2-balloon-png-clipart.png'
+            ];
+
+            // === Количество свечей: можно поменять на 1 или 3 ===
+            const candleCount = 3;
+
+            function createCandles(count) {
+                candlesContainer.innerHTML = '';
+
+                for (let i = 0; i < count; i++) {
+                    const candle = document.createElement('div');
+                    candle.classList.add('candle');
+
+                    const offsetPercent = count === 1 ? 50 : (30 + i * 20);
+                    candle.style.left = `${offsetPercent}%`;
+
+                    const flame = document.createElement('div');
+                    flame.classList.add('flame');
+                    candle.appendChild(flame);
+
+                    candlesContainer.appendChild(candle);
+                }
+            }
+
+            createCandles(candleCount);
+
+            function startBalloons() {
+                balloonsInterval = setInterval(() => {
+                    const balloon = document.createElement('div');
+                    balloon.className = 'balloon';
+
+                    const leftPos = 10 + Math.random() * 80;
+                    balloon.style.left = `${leftPos}vw`;
+                    balloon.style.backgroundImage = `url('${balloonImages[Math.floor(Math.random() * balloonImages.length)]}')`;
+                    balloon.style.animationDuration = `${6 + Math.random() * 4}s`;
+
+                    const sizeScale = 0.8 + Math.random() * 0.2;
+                    balloon.style.transform = `scale(${sizeScale})`;
+
+                    balloonsContainer.appendChild(balloon);
+
+                    setTimeout(() => {
+                        balloon.remove();
+                    }, 10000);
+                }, 800);
+            }
+
+            function removeAllBalloons() {
+                clearInterval(balloonsInterval);
+                document.querySelectorAll('.balloon').forEach(balloon => {
+                    balloon.remove();
+                });
+            }
+
+            function blowOutCandles() {
+                const flames = document.querySelectorAll('.flame');
+                flames.forEach((flame, index) => {
+                    setTimeout(() => {
+                        flame.classList.add('flame-out');
+                    }, index * 300);
+                });
+            }
+
+            function takeBite() {
+                if (currentBite < biteStages.length - 1) {
+                    cake.classList.add('cake-hidden');
+
+                    setTimeout(() => {
+                        currentBite++;
+                        cake.src = biteStages[currentBite];
+                        cake.classList.remove('cake-hidden');
+                        cake.style.animation = 'cakeAppear 0.5s';
+
+                        setTimeout(takeBite, 500);
+                    }, 500);
+                } else {
+                    cake.classList.add('cake-hidden');
+                    removeAllBalloons();
+
+                    setTimeout(() => {
+                        cake.remove();
+                        showLetter();
+                    }, 500);
+                }
+            }
+
+            function showLetter() {
+                letter.classList.remove('hidden');
+                setTimeout(() => {
+                    letter.style.opacity = '1';
+                    startHearts();
+                    music.play();
+                }, 100);
+            }
+
+            function startHearts() {
+                const heartInterval = setInterval(() => {
+                    const heart = document.createElement('div');
+                    heart.className = 'heart';
+                    heart.innerHTML = '❤️';
+                    heart.style.left = Math.random() * 100 + 'vw';
+                    heart.style.top = '-30px';
+                    heart.style.animationDuration = 3 + Math.random() * 3 + 's';
+                    heartsContainer.appendChild(heart);
+
+                    setTimeout(() => {
+                        heart.remove();
+                    }, 5000);
+                }, 300);
+            }
+
+            setTimeout(() => {
+                startBalloons();
+            }, 1000);
+
+            cake.addEventListener('click', function () {
+                removeAllBalloons();
+                blowOutCandles();
+                setTimeout(takeBite, 500);
+            });
+        });
+    </script>
+</body>
+</html>
+
